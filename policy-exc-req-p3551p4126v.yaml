@@ -1,0 +1,35 @@
+apiVersion: kyverno.io/v2beta1
+kind: PolicyException
+metadata:
+  labels:
+    cleanup.kyverno.io/ttl: 168h
+  name: policy-exc-req-p3551p4126v-0
+spec:
+  exceptions:
+  - policyName: restrict-seccomp-strict
+    ruleNames:
+    - check-seccomp-strict
+    - autogen-check-seccomp-strict
+  match:
+    any:
+    - resources:
+        kinds:
+        - ReplicaSet
+        names:
+        - local-path-provisioner-988d74bc
+        namespaces:
+        - local-path-storage
+    - resources:
+        kinds:
+        - Deployment
+        names:
+        - local-path-provisioner
+        namespaces:
+        - local-path-storage
+    - resources:
+        kinds:
+        - Pod
+        names:
+        - local-path-provisioner-988d74bc-4zszr
+        namespaces:
+        - local-path-storage
