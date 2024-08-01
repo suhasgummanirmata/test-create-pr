@@ -1,0 +1,50 @@
+apiVersion: kyverno.io/v2beta1
+kind: PolicyException
+metadata:
+  labels:
+    cleanup.kyverno.io/ttl: 2024-08-08T170548Z
+  name: policy-exc-req-w3301p2741l-0
+spec:
+  exceptions:
+  - policyName: disallow-capabilities
+    ruleNames:
+    - adding-capabilities
+    - autogen-adding-capabilities
+  match:
+    any:
+    - resources:
+        kinds:
+        - Deployment
+        names:
+        - coredns
+        namespaces:
+        - kube-system
+    - resources:
+        kinds:
+        - Pod
+        names:
+        - coredns-7db6d8ff4d-4svsw
+        - kube-proxy-w6nrk
+        - kube-scheduler-kind-control-plane
+        - etcd-kind-control-plane
+        - kube-controller-manager-kind-control-plane
+        - coredns-7db6d8ff4d-dmg5s
+        - kube-apiserver-kind-control-plane
+        - kindnet-cnbjm
+        namespaces:
+        - kube-system
+    - resources:
+        kinds:
+        - ReplicaSet
+        names:
+        - coredns-7db6d8ff4d
+        namespaces:
+        - kube-system
+    - resources:
+        kinds:
+        - DaemonSet
+        names:
+        - kindnet
+        - kube-proxy
+        namespaces:
+        - kube-system
