@@ -1,0 +1,50 @@
+apiVersion: kyverno.io/v2beta1
+kind: PolicyException
+metadata:
+  labels:
+    cleanup.kyverno.io/ttl: 2024-08-08T174445Z
+  name: policy-exc-req-m7270b1063n-0
+spec:
+  exceptions:
+  - policyName: disallow-privileged-containers
+    ruleNames:
+    - privileged-containers
+    - autogen-privileged-containers
+  match:
+    any:
+    - resources:
+        kinds:
+        - ReplicaSet
+        names:
+        - coredns-7db6d8ff4d
+        namespaces:
+        - kube-system
+    - resources:
+        kinds:
+        - Pod
+        names:
+        - coredns-7db6d8ff4d-dmg5s
+        - kube-controller-manager-kind-control-plane
+        - coredns-7db6d8ff4d-4svsw
+        - kindnet-cnbjm
+        - etcd-kind-control-plane
+        - kube-apiserver-kind-control-plane
+        - kube-proxy-w6nrk
+        - kube-scheduler-kind-control-plane
+        namespaces:
+        - kube-system
+    - resources:
+        kinds:
+        - DaemonSet
+        names:
+        - kube-proxy
+        - kindnet
+        namespaces:
+        - kube-system
+    - resources:
+        kinds:
+        - Deployment
+        names:
+        - coredns
+        namespaces:
+        - kube-system
